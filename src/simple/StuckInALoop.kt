@@ -1,4 +1,4 @@
-package stuckinaloop
+package simple
 
 import java.util.*
 
