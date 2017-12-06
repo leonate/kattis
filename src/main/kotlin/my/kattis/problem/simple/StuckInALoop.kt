@@ -1,4 +1,4 @@
-package simple
+package my.kattis.problem.simple
 
 import java.util.*
 

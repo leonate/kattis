@@ -1,3 +1,7 @@
-.idea
+.idea/
 out/
+kobalt/wrapper/
+.DS_Store
+.kobalt/
+kobaltBuild/
 *.iml
