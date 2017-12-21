@@ -10,8 +10,8 @@ val p = project {
 
     dependencies {
 //        compile("com.beust:jcommander:1.68")
-        compile("org.jetbrains.kotlin:kotlin-runtime:1.1.51")
-        compile("org.jetbrains.kotlin:kotlin-stdlib:1.1.51")
+        compile("org.jetbrains.kotlin:kotlin-runtime:1.2.10")
+        compile("org.jetbrains.kotlin:kotlin-stdlib:1.2.10")
     }
 
     dependenciesTest {
