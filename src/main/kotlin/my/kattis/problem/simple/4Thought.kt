@@ -13,13 +13,6 @@ enum class Op(val priority : Int) {
 }
 
 fun main(args: Array<String>) {
-    println(Op.PLUS < Op.MINUS)
-    val ops = listOf(Op.MINUS, Op.MULT, Op.DIVIDE, Op.PLUS)
-    for (op in ops) {
-        println(op.ordinal)
-        println(op.name)
-    }
-    println(Op.items[2])
     val scanner = Scanner(System.`in`)
     val caseCount = scanner.nextInt()
     for(i in 1..caseCount){
@@ -58,20 +51,49 @@ fun replaceOp(opList: List<Op>, index: Int, newOp: Op): List<Op> {
     return left + newOp + right
 }
 
-data class Node(val op : Op, val left: Node, val right: Node){
-    fun add(newOp: Op){
+sealed class Expr
+data class Const(val number: Int) : Expr()
+data class Operation(val op: Op) : Expr()
 
-    }
-}
+
 
 fun calculateResult(ops: List<Op>): Int {
-    val first = ops[0]
-    val second = ops[1]
-    val third = ops[2]
-    val root : Node
-    for (op in ops) {
+    val exprList = buildExprList(ops)
+    return evalExprList(exprList)
+}
 
+fun evalExprList(exprList: List<Expr>) : Int {
+    val stack = Stack<Int>()
+    fun eval(expr: Expr) {
+        when (expr) {
+            is Const -> stack.push(expr.number)
+            is Operation -> {
+                val arg2: Int = stack.pop()
+                val arg1: Int = stack.pop()
+                val result = when (expr.op) {
+                    Op.PLUS -> arg1 + arg2
+                    Op.MINUS -> arg1 - arg2
+                    Op.MULT -> arg1 * arg2
+                    Op.DIVIDE -> arg1 / arg2
+                }
+                stack.push(result)
+            }
+        }
     }
+    exprList.forEach(::eval)
+    return stack.pop()
+}
+
+fun buildExprList(ops: List<Op>): List<Expr> {
+    val four = Const(4)
+    var result = mutableListOf<Expr>()
+    result.add(four)
     TODO("Not implemented")
+//    for (op in ops) {
+//        when (op) {
+//
+//        }
+//    }
+//    ops.sortedByDescending { it.priority }
 }
 
